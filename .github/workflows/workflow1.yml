@@ -2,9 +2,13 @@ name: Production Deployment
 on: 
   workflow_dispatch:
     inputs:
-      git-ref:
-        description: Git Ref (Optional)    
-        required: false
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+
 jobs:
   deploy:
     name: Deploy To Production
