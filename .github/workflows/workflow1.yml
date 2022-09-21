@@ -1,0 +1,26 @@
+name: Production Deployment
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+
+jobs:
+  deploy:
+    name: Deploy To Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository (Latest)
+        uses: actions/checkout@v2
+        if: github.event.inputs.git-ref == ''
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v2
+        if: github.event.inputs.git-ref != ''
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
+      - name: ...
+        run: ...
